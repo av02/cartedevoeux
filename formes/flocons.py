@@ -8,7 +8,7 @@ class flocons:
     def __init__(self,canva):
         self.canva = canva
         self.largeur=random.randint(1,5)
-        self.x = random.randint(0,350)
+        self.x = random.randint(0,canva.x)
         self.y = 0
         self.id = self._flocon(self.x,self.y,self.largeur)
 
@@ -28,11 +28,16 @@ class flocons:
 
 tous_flocons = []
 
-def mouvement(canva):
+def surcouche_neige(canva):
+    """
+    canva :  le canva où ajouter la surcouche
+    
+    permet de faire neiger sur le canva.
+    """
     for i in range(0,6):
         tous_flocons.append(flocons(canva))
     for flocon in tous_flocons:
-        if flocon.y > 350:
+        if flocon.y > canva.y:
             del flocon
 
         else:
