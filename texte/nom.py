@@ -6,7 +6,7 @@ textes = {
         "es":"¿como te llamas?"
     },
     "nom_trop_long":{
-        "fr":"ton nom est réelement si long?,
+        "fr":"ton nom est réelement si long?",
         "en":"your name is too long",
         "es":"tu nombre es demasiado largo"
     }
@@ -19,13 +19,14 @@ class ecran_base:
     def __init__(self,fenetre):
         self.langue = "fr"
         self.fenetre = fenetre
-        self.canva = tkinter.Canvas(fenetre,,height=350,width=350,bd=0)
+        self.canva = tkinter.Canvas(fenetre,height=350,width=350,bd=0)
+        self.canva.pack()
 
         self.nom = tkinter.StringVar()
         self.choix_bouton = tkinter.StringVar()
         self.txtlangue = textes["question nom"][self.langue]
         
-        self.question = self.canva.create_text(100,145,text = self.txtlangue)
+        self.question = self.canva.create_text(130,160,text = self.txtlangue)
         self.champs_nom = tkinter.Entry(self.fenetre,textvariable = self.nom,width=10)
         self.bouton_validation = tkinter.Button(self.fenetre,text = "✅",command= self._bouton_commande)
         self.menu_langue = tkinter.OptionMenu(self.fenetre,self.choix_bouton,"français","espagnol","anglais",command = self._langue )
@@ -48,10 +49,12 @@ class ecran_base:
             self.langue = "en"
         elif choix == "espagnol":
             self.langue = "es"
-        self.question.itemconfig(text = textes["question_nom"][self.langue]
+        self.canva.itemconfig(self.question,text = textes["question nom"][self.langue])
         try:
-            self.message_erreur.itemconfig(text = textes["nom_trop_long"][self.langue]
-                             
+            self.canva.itemconfig(self.message_erreur,text = textes["nom_trop_long"][self.langue])
+        except:
+            pass
+
 
     def _bouton_commande(self):
         """
@@ -82,4 +85,3 @@ class ecran_base:
             supprime la page de demande
         """
         self.fenetre.destroy()
-        
