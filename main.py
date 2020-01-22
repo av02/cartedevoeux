@@ -31,7 +31,7 @@ fenetre_principale.configure(bg="#777777")
 
 
 #definition du cadre de dessin 
-canva = tkinter.Canvas(fenetre_principale,height=350,width=350)
+canva = tkinter.Canvas(fenetre_principale,height=350,width=350,bd=0)
 canva.pack()
 
 
@@ -58,7 +58,7 @@ sapin1.tracer(canva)
 
 #le texte
 #TODO: modifier la police/taille
-text = canva.create_text(220,110,text = "bonne année "+prenom)
+text = canva.create_text(220,110,text = "bonne année "+prenom,font=('Savoye LET',40))
 
 #faire neiger
 flo.surcouche_neige(canva)
