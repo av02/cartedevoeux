@@ -57,7 +57,6 @@ sapin1 = f.formes(150,"black",120,300,"sapin","green")
 sapin1.tracer(canva)
 
 #le texte
-#TODO: modifier la police/taille
 text = canva.create_text(220,110,text = "bonne année "+prenom,font=('Savoye LET',40))
 
 #faire neiger
