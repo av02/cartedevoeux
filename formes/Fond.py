@@ -1,47 +1,42 @@
 import tkinter 
 class fond:
     """
-    descrption ici
+    permet de creer le fond du canva
     """
-    def __init__(self,couleur1,couleur2,couleur3,canva):
-        """
-        docstring
-        """
-        self.couleur1 = couleur1
-        self.couleur2 = couleur2
-        self.couleur3 = couleur3
-        self.canva = canva
+    def __init__(self,*couleur):
+        self.couleur = couleur
+        self.fond=[]
+        self.canva =[]
 
-    def tracer_fond(self):
+    def tracer_fond(self,canva):
         """
-        docstring
+        permet de tracer le fond 
         """
-        self.fond1 = self.canva.create_rectangle(0,0,116,350,fill=self.couleur1)
-        self.fond2 = self.canva.create_rectangle(116,350,232,0,fill=self.couleur2)
-        self.fond3 = self.canva.create_rectangle(232,0,350,350,fill=self.couleur3)
-    
-    def changer_couleur(self,nouvelle_couleur1,nouvelle_couleur2,nouvelle_couleur3):
+        self.canva.append(canva)
+        for i in range(35):
+            self.fond.append(canva.create_polygon([(350*i/10,0),(350*(i+1)/10,0),((350*(i+1)/10)-350,350),((350*i/10)-350,350)],fill=list(self.couleur)[i%len(list(self.couleur))]))
+        
+
+    def changer_couleur(self,couleur:list):
         """
-        docstring
+        permet de changer les couleurs
         """
-        self.couleur1 = nouvelle_couleur1
-        self.couleur2 = nouvelle_couleur2
-        self.couleur3 = nouvelle_couleur3
-        self.canva.itemconfig(self.fond1,fill=self.couleur1)
-        self.canva.itemconfig(self.fond2,fill=self.couleur2)
-        self.canva.itemconfig(self.fond3,fill=self.couleur3)
+        self.couleur = couleur
+        for canva in self.canva:
+            for i in range(35):
+                canva.itemconfig(self.fond[i],fill=self.couleur[i%len(self.couleur)])
 
 
-    def clignoter(self,fen,frequence,liste_couleur:list,_Recursivite=0):
+    def clignoter(self,fen,frequence,couleur,_Recursivite=0):
         """
         faire clignoter l'objet
 
         fen est une fenetre tKinter
         frequence est la frequence de clignotement en ms
-        liste_couleur est une liste de listes de 3 couleurs pour  l'ensemble des  couleurs dans l'ordre d'apparition
+        couleur est un ensemble de couleurs
         """
-        couleur = liste_couleur[_Recursivite%len(liste_couleur)]
-        self.changer_couleur(couleur[0],couleur[1],couleur[2])
+        self.couleur = couleur[_Recursivite%len(couleur)]
+        self.changer_couleur(self.couleur)
         def _appel():
-            self.clignoter(fen,frequence,liste_couleur,_Recursivite=_Recursivite+1)
+            self.clignoter(fen,frequence,couleur,_Recursivite+1)
         fen.after(frequence,_appel)
