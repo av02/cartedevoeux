@@ -36,8 +36,8 @@ canva.pack()
 
 
 #definition du fond
-fond = fd.fond("#ff2700","#c6c318","#a1b9fb",canva)
-fond.tracer_fond()#dessiner le fond
+fond = fd.fond("#ff2700","#c6c318","#a1b9fb")
+fond.tracer_fond(canva)#dessiner le fond
 fond.clignoter(fenetre_principale,120,[["#ff2700","#c6c318","#a1b9fb"],["pink","yellow","green"]])#faire clignoter
 
 
